@@ -24,18 +24,18 @@ public class NumbersActivity extends AppCompatActivity {
          * String[] words = new String[]{"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"};*/
 
         /**Using ArrayList which can have variable size*/
-        ArrayList<String> words = new ArrayList<String>();
+        ArrayList<Word> words = new ArrayList<Word>();
 
-        words.add("one");
-        words.add("two");
-        words.add("three");
-        words.add("four");
-        words.add("five");
-        words.add("six");
-        words.add("seven");
-        words.add("eight");
-        words.add("nine");
-        words.add("ten");
+        words.add(new Word("one", "lutti"));
+        words.add(new Word("two", "otiiko"));
+        words.add(new Word("three", "tolookosu"));
+        words.add(new Word("four", "oyyisa"));
+        words.add(new Word("five", "massokka"));
+        words.add(new Word("six", "temmokka"));
+        words.add(new Word("seven", "kenekaku"));
+        words.add(new Word("eight", "kawinta"));
+        words.add(new Word("nine","wo'e"));
+        words.add(new Word("ten","na'acha"));
 
         /** Using linear layout of text views which would be suitable for fixed smaller number of items in a list
          * LinearLayout rootView = (LinearLayout)  findViewById(R.id.rootView);
@@ -47,8 +47,16 @@ public class NumbersActivity extends AppCompatActivity {
         *    i++;
         }*/
 
-        /** Using ListView with array adapter will allow view recycling for large number of views preventing memory leak issues*/
-        ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, words);
+        /** Using ListView with array adapter will allow view
+         * recycling for large number of views preventing memory
+         * leak issues*/
+        /**ArrayAdapter<Word> itemsAdapter = new ArrayAdapter<Word>(this, R.layout.list_item, words);*/
+
+        /**Using custom defined word adapter to handle the cases
+         * where we need to fill in multiple views within each
+         *list item
+         */
+        WordAdapter itemsAdapter = new WordAdapter(this, words);
         ListView listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(itemsAdapter);
     }

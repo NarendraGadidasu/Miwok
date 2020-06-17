@@ -1,9 +1,11 @@
 package android.example.miwok;
 
-/**Word class can be used to create objects which could be used to populate the contents of the items of ListView*/
+/**Word class can be used to create objects which could be
+ * used to populate the contents of the items of ListView*/
 public class Word {
 
-    /**private variables for Miwok and Default translation languages*/
+    /**private variables for Miwok and Default translation
+     * languages*/
     private String mMiwokTranslation;
     private String mDefaultTranslation;
 
