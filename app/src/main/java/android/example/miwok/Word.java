@@ -8,6 +8,7 @@ public class Word {
      * languages*/
     private String mMiwokTranslation;
     private String mDefaultTranslation;
+    private int mImageResourceId;
 
     /**constructor method for creating objects of word class*/
     public Word(String et, String mt){
@@ -25,4 +26,7 @@ public class Word {
         return mDefaultTranslation;
     }
 
+    public int getmImageResourceId() {
+        return mImageResourceId;
+    }
 }
