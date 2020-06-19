@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -54,6 +55,10 @@ public class WordAdapter extends ArrayAdapter<Word> {
         TextView dTextView = listItemView.findViewById(R.id.list_item_text_2);
 
         dTextView.setText(currentWord.getDefaultTranslation());
+
+        ImageView imageView = listItemView.findViewById(R.id.list_item_image);
+
+        imageView.setImageResource(currentWord.getmImageResourceId());
 
         return listItemView;
 
