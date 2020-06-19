@@ -16,6 +16,12 @@ public class Word {
         mMiwokTranslation = mt;
     }
 
+    public Word(String et, String mt, int img){
+        mDefaultTranslation = et;
+        mMiwokTranslation = mt;
+        mImageResourceId = img;
+    }
+
     /**method to access the Miwok translation*/
     public String getMiwokTranslation(){
         return mMiwokTranslation;
