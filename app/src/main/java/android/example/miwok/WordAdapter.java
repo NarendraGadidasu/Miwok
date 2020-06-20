@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 
@@ -19,13 +20,17 @@ import java.util.ArrayList;
  */
 public class WordAdapter extends ArrayAdapter<Word> {
 
+    private int mColorResourceId;
+
     /**Defining the constructor to use the constructor of
      * the super class ArrayAdapter<Word>
      * @param context
      * @param words Array list of Word objects
+     * @param color Background color for the text views
      */
-    public WordAdapter(Activity context, ArrayList<Word> words){
+    public WordAdapter(Activity context, ArrayList<Word> words, int color){
         super(context, 0, words);
+        mColorResourceId = color;
     }
 
     /**Overriding the behavior of getView function defined in the
@@ -58,7 +63,16 @@ public class WordAdapter extends ArrayAdapter<Word> {
 
         ImageView imageView = (ImageView) listItemView.findViewById(R.id.list_item_image);
 
-        imageView.setImageResource(currentWord.getmImageResourceId());
+        if (currentWord.hasImage()) {
+            imageView.setVisibility(View.VISIBLE);
+            imageView.setImageResource(currentWord.getmImageResourceId());}
+        else {
+            imageView.setVisibility(View.GONE);
+        }
+
+        View textContainer = listItemView.findViewById(R.id.text_item_container);
+        int color = ContextCompat.getColor(getContext(), mColorResourceId);
+        textContainer.setBackgroundColor(color);
 
         return listItemView;
 
