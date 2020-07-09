@@ -15,6 +15,13 @@ public class FamilyActivity extends AppCompatActivity {
 
     private MediaPlayer mediaPlayer;
 
+    private MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mp) {
+            releaseMediaPlayer();
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,12 +81,7 @@ public class FamilyActivity extends AppCompatActivity {
                 mediaPlayer = MediaPlayer.create(FamilyActivity.this,  word.getmAudioResourceId());
                 Toast.makeText(FamilyActivity.this, "item clicked", Toast.LENGTH_SHORT).show();
                 mediaPlayer.start();
-                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        releaseMediaPlayer();
-                    }
-                });
+                mediaPlayer.setOnCompletionListener(mCompletionListener);
             }
         });
     }
