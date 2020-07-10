@@ -2,6 +2,8 @@ package android.example.miwok;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -22,10 +24,36 @@ public class PhrasesActivity extends AppCompatActivity {
         }
     };
 
+    private AudioManager audioManager;
+
+    private AudioManager.OnAudioFocusChangeListener afChangeListener = new AudioManager.OnAudioFocusChangeListener() {
+        @Override
+        public void onAudioFocusChange(int focusChange) {
+            switch(focusChange) {
+                case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
+                    mediaPlayer.pause();
+                    mediaPlayer.seekTo(0);
+                    break;
+                case AudioManager.AUDIOFOCUS_LOSS:
+                    releaseMediaPlayer();
+                    break;
+                case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
+                    mediaPlayer.pause();
+                    mediaPlayer.seekTo(0);
+                    break;
+                case AudioManager.AUDIOFOCUS_GAIN:
+                    mediaPlayer.start();
+                    break;
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.word_list);
+
+         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
 
         /** Using the data structure array which has fixed size
@@ -78,10 +106,20 @@ public class PhrasesActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 releaseMediaPlayer();
                 Word word = words.get(position);
-                mediaPlayer = MediaPlayer.create(PhrasesActivity.this,  word.getmAudioResourceId());
-                Toast.makeText(PhrasesActivity.this, "item clicked", Toast.LENGTH_SHORT).show();
-                mediaPlayer.start();
-                mediaPlayer.setOnCompletionListener(mCompletionListener);
+
+                int res = audioManager.requestAudioFocus(afChangeListener, AudioManager.STREAM_MUSIC,
+                        AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+
+                if (res == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+
+
+                    mediaPlayer = MediaPlayer.create(PhrasesActivity.this,
+                            word.getmAudioResourceId());
+
+                    mediaPlayer.start();
+                    mediaPlayer.setOnCompletionListener(mCompletionListener);
+
+                }
             }
         });
     }
