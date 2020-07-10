@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Showing list of numbers", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, NumbersActivity.class);
                 startActivity(intent);
             }
@@ -35,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view){
-                Toast.makeText(MainActivity.this, "Showing list of family members", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, FamilyActivity.class);
                 startActivity(intent);
             }
@@ -47,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Showing list of colors", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, ColorsActivity.class);
                 startActivity(intent);
             }
@@ -58,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
         phrases.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Showing list of Phrases", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(MainActivity.this, PhrasesActivity.class);
                 startActivity(intent);
