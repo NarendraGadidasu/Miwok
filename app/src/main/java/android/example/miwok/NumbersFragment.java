@@ -71,8 +71,6 @@ public class NumbersFragment extends Fragment {
     public static NumbersFragment newInstance(String param1, String param2) {
         NumbersFragment fragment = new NumbersFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -80,7 +78,6 @@ public class NumbersFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
